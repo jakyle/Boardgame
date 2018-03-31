@@ -1,0 +1,45 @@
+{
+  "name": "electron-react",
+  "version": "0.1.0",
+  "private": true,
+  "author": "James&Damon",
+  "dependencies": {
+    "electron-is-dev": "^0.3.0",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-scripts-ts": "2.14.0"
+  },
+  "main": "public/electron-starter.js",
+  "homepage": "./",
+  "scripts": {
+    "react-start": "react-scripts-ts start",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "build -c.extraMetadata.main=build/electron-starter.js",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject",
+    "electron-start": "electron .",
+    "start": "concurrently \"yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
+  },
+  "devDependencies": {
+    "@types/jest": "^22.2.2",
+    "@types/node": "^9.6.1",
+    "@types/react": "^16.1.0",
+    "@types/react-dom": "^16.0.4",
+    "concurrently": "^3.5.1",
+    "electron": "^1.8.4",
+    "electron-builder": "^20.8.1",
+    "typescript": "^2.8.1",
+    "wait-on": "^2.1.0"
+  },
+  "build": {
+    "appId": "com.boardgame",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  }
+}
