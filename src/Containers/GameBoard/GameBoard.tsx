@@ -51,12 +51,14 @@ export default class GameBoard extends React.Component<GameBoardProps, GameBoard
 
   render() {
     const { board } = this.state;
-    const tiles = board.map((tile, index) => {
-      return (<Tile clicked={this.clickHandler} key={index} tileInfo={tile} />);
-    });
     return (
       <div className="Game-Board">
-        {tiles}
+        {board.map((tile, index) => (
+          <Tile 
+            clicked={this.clickHandler} 
+            key={index} 
+            tileInfo={tile} 
+          />))}
       </div>
     );
   }
