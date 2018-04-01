@@ -17,7 +17,7 @@ const Tile: React.SFC<TileProps> = ( {tileInfo, clicked}: TileProps) => {
       tile = (<div className="Player Two" />);
       break;
     default:
-      tile = (<div className="Player" />);
+      tile = (<></>);
       break;
   }
   return (<div onClick={(e) => clicked(tileInfo)} className="Tile">{tile}</div>);
