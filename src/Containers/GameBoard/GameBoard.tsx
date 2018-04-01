@@ -1,34 +1,53 @@
 import * as React from 'react';
 import './GameBoard.css';
 import Tile from '../../Components/Tile/Tile';
-import { Occupied, TileInfo } from '../../Models/Models';
+import { Occupied, TileInfo, TileLocationData } from '../../Models/Models';
 // import { SyntheticEvent } from 'react';
 
 export interface GameBoardProps {
 }
 
 export interface GameBoardState {
-  board: Occupied[][];
-  currentTile: TileInfo;
+  board: TileLocationData[];
+  currentTile: TileInfo | null;
 }
 
 export default class GameBoard extends React.Component<GameBoardProps, GameBoardState> {
 
   state = {
-    board: [
-      [Occupied.Empty, Occupied.Empty, Occupied.Empty, Occupied.Empty, Occupied.Empty],
-      [Occupied.Empty, Occupied.Empty, Occupied.PlayerTwo, Occupied.Empty, Occupied.Empty],
-      [Occupied.Empty, Occupied.Empty, Occupied.Empty, Occupied.Empty, Occupied.Empty],
-      [Occupied.Empty, Occupied.PlayerOne, Occupied.Empty, Occupied.Empty, Occupied.Empty],
-      [Occupied.Empty, Occupied.Empty, Occupied.Empty, Occupied.Empty, Occupied.Empty],
+    board:  [
+      { key: {row: 0, col: 0}, value: Occupied.Empty }, 
+      { key: {row: 0, col: 1}, value: Occupied.Empty }, 
+      { key: {row: 0, col: 2}, value: Occupied.Empty },
+      { key: {row: 0, col: 3}, value: Occupied.Empty }, 
+      { key: {row: 0, col: 4}, value: Occupied.Empty }, 
+      { key: {row: 1, col: 0}, value: Occupied.Empty },
+      { key: {row: 1, col: 1}, value: Occupied.Empty }, 
+      { key: {row: 1, col: 2}, value: Occupied.Empty }, 
+      { key: {row: 1, col: 3}, value: Occupied.Empty },
+      { key: {row: 1, col: 4}, value: Occupied.Empty },
+      { key: {row: 2, col: 0}, value: Occupied.Empty },
+      { key: {row: 2, col: 1}, value: Occupied.Empty },
+      { key: {row: 2, col: 2}, value: Occupied.PlayerOne },
+      { key: {row: 2, col: 3}, value: Occupied.Empty },
+      { key: {row: 2, col: 4}, value: Occupied.Empty },
+      { key: {row: 3, col: 0}, value: Occupied.Empty },
+      { key: {row: 3, col: 1}, value: Occupied.Empty },
+      { key: {row: 3, col: 2}, value: Occupied.Empty },
+      { key: {row: 3, col: 3}, value: Occupied.Empty },
+      { key: {row: 3, col: 4}, value: Occupied.Empty },
+      { key: {row: 4, col: 0}, value: Occupied.Empty },
+      { key: {row: 4, col: 1}, value: Occupied.Empty },
+      { key: {row: 4, col: 2}, value: Occupied.Empty },
+      { key: {row: 4, col: 3}, value: Occupied.PlayerTwo },
+      { key: {row: 4, col: 4}, value: Occupied.Empty },
+      { key: {row: 5, col: 0}, value: Occupied.Empty },
+      { key: {row: 5, col: 1}, value: Occupied.Empty },
+      { key: {row: 5, col: 2}, value: Occupied.Empty },
+      { key: {row: 5, col: 3}, value: Occupied.Empty },
+      { key: {row: 5, col: 4}, value: Occupied.Empty }
     ],
-    currentTile: {
-      occupied: Occupied.Empty,
-      position: {
-        row: 0,
-        col: 0
-      }
-    }
+    currentTile: null,
   };
 
   public clickHandler = (tile: TileInfo) =>  {
@@ -37,19 +56,13 @@ export default class GameBoard extends React.Component<GameBoardProps, GameBoard
 
   render() {
     const { board } = this.state;
-    const tiles = board.map((obj, row) => (
-      <div key={`row ${row}`}>{obj.map((occupied, col) => {
-          let curTile = { occupied, position: { col, row }};
-          return (<Tile clicked={this.clickHandler} key={`col ${col}`} tileInfo={curTile} />);
-        })}
-      </div>
-      ));
+    const tiles = board.map((obj, index) => {
+      const curTile: TileInfo = { occupied: obj.value, position: { col: obj.key.col, row: obj.key.row }};
+      return (<Tile clicked={this.clickHandler} key={index} tileInfo={curTile} />);
+    });
     return (
       <div className="Game-Board">
         {tiles}
-        <h1>{this.state.currentTile.occupied}</h1>
-        <h4>col: {this.state.currentTile.position.col}</h4>
-        <h4>row: {this.state.currentTile.position.row}</h4>
       </div>
     );
   }
