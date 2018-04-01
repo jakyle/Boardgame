@@ -1,15 +1,13 @@
 .Tile {
-  width: 100px;
-  height: 100px;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   border: 0.5px solid #000000;
 }
 
 .Player {
-  width: 65px;
-  height: 65px;
+  width: 75%;
+  height: 75%;
   border-radius: 50%;
   display: inline-block;
 }
