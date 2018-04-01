@@ -4,17 +4,12 @@ export enum Occupied {
   PlayerTwo
 }
 
-export class TileLocationData {
-  key: TilePosition;
-  value: Occupied;
+export class TileInfo {
+  location: TilePosition;
+  occupied: Occupied;
 }
 
 export interface TilePosition {
   col: number;
   row: number;
-}
-
-export class TileInfo {
-  occupied: Occupied;
-  position: TilePosition;
 }
