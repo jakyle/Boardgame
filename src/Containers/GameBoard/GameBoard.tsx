@@ -2,7 +2,7 @@ import * as React from 'react';
 import './GameBoard.css';
 import Tile from '../../Components/Tile/Tile';
 import { Occupied, TileInfo } from '../../Models/Models';
-import { SyntheticEvent } from 'react';
+// import { SyntheticEvent } from 'react';
 
 export interface GameBoardProps {
 }
@@ -31,8 +31,7 @@ export default class GameBoard extends React.Component<GameBoardProps, GameBoard
     }
   };
 
-  public clickHandler = (tile: TileInfo) => (event: SyntheticEvent<HTMLDivElement>) => {
-    event.
+  public clickHandler = (tile: TileInfo) =>  {
     this.setState({currentTile: tile});
   }
 
@@ -40,9 +39,7 @@ export default class GameBoard extends React.Component<GameBoardProps, GameBoard
     const { board } = this.state;
     const tiles = board.map((obj, row) => (
       <div key={`row ${row}`}>{obj.map((occupied, col) => {
-          let curTile = new TileInfo();
-          curTile.occupied = occupied;
-          curTile.position = { col, row };
+          let curTile = { occupied, position: { col, row }};
           return (<Tile clicked={this.clickHandler} key={`col ${col}`} tileInfo={curTile} />);
         })}
       </div>
@@ -51,6 +48,8 @@ export default class GameBoard extends React.Component<GameBoardProps, GameBoard
       <div className="Game-Board">
         {tiles}
         <h1>{this.state.currentTile.occupied}</h1>
+        <h4>col: {this.state.currentTile.position.col}</h4>
+        <h4>row: {this.state.currentTile.position.row}</h4>
       </div>
     );
   }
