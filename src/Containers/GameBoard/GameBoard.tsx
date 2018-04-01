@@ -1,87 +1,37 @@
 import * as React from 'react';
 import './GameBoard.css';
 import Tile from '../../Components/Tile/Tile';
-import { Occupied, TileInfo } from '../../Models/Models';
+import { TileInfo } from '../../Models/Models';
+import { ApplicationState } from '../../Store';
+import { BoardActions } from '../../Store/Board/types';
+import { Dispatch, connect } from 'react-redux';
+import { updateBoard } from '../../Store/Board/action';
 // import { SyntheticEvent } from 'react';
 
-export interface GameBoardProps {
-}
-
-export interface GameBoardState {
+export interface GameBoardState { }
+export interface GameBoardProps { }
+export interface StoreProps {
   board: TileInfo[];
-  currentTile: TileInfo | null;
+  currentTile: TileInfo;
+}
+export interface ConnectedStates { 
+  onUpdateBoard: (tile: TileInfo) => void;
 }
 
-export default class GameBoard extends React.Component<GameBoardProps, GameBoardState> {
+type AllProps = 
+  & GameBoardProps
+  & StoreProps
+  & ConnectedStates;
 
-  selectedTitle: TileInfo | null = null;
-
-  state = {
-    board: [
-      { location: { row: 1, col: 1 }, occupied: Occupied.Empty },
-      { location: { row: 1, col: 2 }, occupied: Occupied.Empty },
-      { location: { row: 1, col: 3 }, occupied: Occupied.Empty },
-      { location: { row: 1, col: 4 }, occupied: Occupied.Empty },
-      { location: { row: 1, col: 5 }, occupied: Occupied.Empty },
-      { location: { row: 2, col: 1 }, occupied: Occupied.Empty },
-      { location: { row: 2, col: 2 }, occupied: Occupied.Empty },
-      { location: { row: 2, col: 3 }, occupied: Occupied.Empty },
-      { location: { row: 2, col: 4 }, occupied: Occupied.PlayerTwo },
-      { location: { row: 2, col: 5 }, occupied: Occupied.Empty },
-      { location: { row: 3, col: 1 }, occupied: Occupied.Empty },
-      { location: { row: 3, col: 2 }, occupied: Occupied.Empty },
-      { location: { row: 3, col: 3 }, occupied: Occupied.Empty },
-      { location: { row: 3, col: 4 }, occupied: Occupied.Empty },
-      { location: { row: 3, col: 5 }, occupied: Occupied.Empty },
-      { location: { row: 4, col: 1 }, occupied: Occupied.Empty },
-      { location: { row: 4, col: 2 }, occupied: Occupied.PlayerOne },
-      { location: { row: 4, col: 3 }, occupied: Occupied.Empty },
-      { location: { row: 4, col: 4 }, occupied: Occupied.Empty },
-      { location: { row: 4, col: 5 }, occupied: Occupied.Empty },
-      { location: { row: 5, col: 1 }, occupied: Occupied.Empty },
-      { location: { row: 5, col: 2 }, occupied: Occupied.Empty },
-      { location: { row: 5, col: 3 }, occupied: Occupied.Empty },
-      { location: { row: 5, col: 4 }, occupied: Occupied.Empty },
-      { location: { row: 5, col: 5 }, occupied: Occupied.Empty },
-    ],
-
-    // init currentTile to non gameboard square to avoid null problems
-    currentTile: { location: { row: -1, col: -1 }, occupied: Occupied.Empty }
-  };
+class GameBoard extends React.Component<AllProps, GameBoardState> {
 
   public clickHandler = (tile: TileInfo) => {
-    const board = [...this.state.board];
-
-    // Selected a Player
-    if (tile.occupied !== Occupied.Empty) {
-      this.setState({ currentTile: tile });
-    } else {
-      // selected whitespace.
-
-      // only set if currentTile.occupied is set to a player,
-      // (it is set to whitespace by default and at the end of this code block).
-      if (this.state.currentTile.occupied === Occupied.PlayerOne
-        || this.state.currentTile.occupied === Occupied.PlayerTwo) {
-
-        // remove player from the board.
-        // setting player.occupied to empty also sets currentTile,
-        // idk why that's the case, so store it's value in a local variable.
-        let player = board.filter(x => x === this.state.currentTile)[0];
-        let occupied = player.occupied;
-        player.occupied = Occupied.Empty;
-        board.filter(x => x === this.state.currentTile)[0] = player;
-
-        // update selected whitespace to be new player.
-        let whitespace = board.filter(x => x.location === tile.location)[0];
-        whitespace.occupied = occupied;
-        board.filter(x => x.location === tile.location)[0] = whitespace;
-        this.setState({ board });
-      }
-    }
+    this.props.onUpdateBoard(tile);
+    this.forceUpdate();
   }
 
   render() {
-    const { board } = this.state;
+    const { board } = this.props;
     return (
       <div className="Game-Board">
         {board.map((tile, index) => (
@@ -94,3 +44,15 @@ export default class GameBoard extends React.Component<GameBoardProps, GameBoard
     );
   }
 }
+
+const mapStateToProps = (state: ApplicationState): StoreProps => {
+  const { currentTile, board } = state.board;
+  return { board, currentTile };
+};
+const mapDispatchToProps = (dispatch: Dispatch<BoardActions>): ConnectedStates => {
+  return {
+    onUpdateBoard: (tile: TileInfo) => dispatch(updateBoard(tile)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameBoard);

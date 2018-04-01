@@ -1,0 +1,3 @@
+export {
+  updateObject,
+} from './util';
