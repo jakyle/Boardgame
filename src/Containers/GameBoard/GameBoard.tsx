@@ -41,11 +41,6 @@ export default class GameBoard extends React.Component<GameBoardProps, GameBoard
       { key: {row: 4, col: 2}, value: Occupied.Empty },
       { key: {row: 4, col: 3}, value: Occupied.PlayerTwo },
       { key: {row: 4, col: 4}, value: Occupied.Empty },
-      { key: {row: 5, col: 0}, value: Occupied.Empty },
-      { key: {row: 5, col: 1}, value: Occupied.Empty },
-      { key: {row: 5, col: 2}, value: Occupied.Empty },
-      { key: {row: 5, col: 3}, value: Occupied.Empty },
-      { key: {row: 5, col: 4}, value: Occupied.Empty }
     ],
     currentTile: null,
   };
