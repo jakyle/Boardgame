@@ -9,6 +9,7 @@ export interface PosValid {
 export interface HomeState {
   pos: TilePosition;
   errorMessage: string;
+  includePlayers: boolean;
 }
 
 export interface StoreProps {}
