@@ -30,6 +30,7 @@ export type BoardActions =
 // this is the contract for my Carts state, the initial state
 // will be defined in the actual reducer.
 export interface BoardState {
+  size: TilePosition;
   board: TileInfo[];
   currentTile: TileInfo;
 }

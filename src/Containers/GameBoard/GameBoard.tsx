@@ -1,5 +1,4 @@
 import * as React from 'react';
-import './GameBoard.css';
 import Tile from '../../Components/Tile/Tile';
 import { TileInfo } from '../../Models/Models';
 import { ApplicationState } from '../../Store';
@@ -7,6 +6,7 @@ import { BoardActions } from '../../Store/Board/types';
 import { Dispatch, connect } from 'react-redux';
 import { updateBoard } from '../../Store/Board/action';
 import { AllProps, GameBoardState, StoreProps, ConnectedStates } from './GameBoard.ts';
+import Grid from '../../Components/Grid/Grid';
 
 class GameBoard extends React.Component<AllProps, GameBoardState> {
 
@@ -16,23 +16,23 @@ class GameBoard extends React.Component<AllProps, GameBoardState> {
   }
   
   render() {
-    const { board } = this.props;
+    const { board, size } = this.props;
     return (
-      <div className="Game-Board">
+      <Grid size={size}>
         {board.map((tile, index) => (
           <Tile
             clicked={this.clickHandler}
             key={index}
             tileInfo={tile}
           />))}
-      </div>
+      </Grid>
     );
   }
 }
 
 const mapStateToProps = (state: ApplicationState): StoreProps => {
-  const { currentTile, board } = state.board;
-  return { board, currentTile };
+  const { currentTile, board, size } = state.board;
+  return { board, currentTile, size };
 };
 const mapDispatchToProps = (dispatch: Dispatch<BoardActions>): ConnectedStates => {
   return {

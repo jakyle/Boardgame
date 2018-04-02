@@ -5,10 +5,10 @@ export interface HomeState {
   pos: TilePosition
 }
 
-export interface StoreProps extends RouteComponentProps<{}> {}
-export interface HomeProps {}
+export interface StoreProps {}
+export interface HomeProps extends RouteComponentProps<{}> {}
 export interface ConnectedStates {
-  onUpdateBoard: (size: TilePosition) => void;
+  onCreateBoard: (size: TilePosition) => void;
 }
 
 export type AllProps = 
