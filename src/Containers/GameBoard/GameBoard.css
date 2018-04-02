@@ -8,10 +8,10 @@
 }
 
 @media (max-width: 499px), (max-height: 499px)  {
-    .Game-Board {
-      grid-template-columns: repeat(5, 75px);
-      grid-template-rows: repeat(5, 75px);
-    }
+  .Game-Board {
+    grid-template-columns: repeat(5, 75px);
+    grid-template-rows: repeat(5, 75px);
+  }
 }
 
 @media (max-width: 374px), (max-height: 374px)  {

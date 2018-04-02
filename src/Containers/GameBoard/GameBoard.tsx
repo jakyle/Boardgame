@@ -6,22 +6,7 @@ import { ApplicationState } from '../../Store';
 import { BoardActions } from '../../Store/Board/types';
 import { Dispatch, connect } from 'react-redux';
 import { updateBoard } from '../../Store/Board/action';
-// import { SyntheticEvent } from 'react';
-
-export interface GameBoardState { }
-export interface GameBoardProps { }
-export interface StoreProps {
-  board: TileInfo[];
-  currentTile: TileInfo;
-}
-export interface ConnectedStates { 
-  onUpdateBoard: (tile: TileInfo) => void;
-}
-
-type AllProps = 
-  & GameBoardProps
-  & StoreProps
-  & ConnectedStates;
+import { AllProps, GameBoardState, StoreProps, ConnectedStates } from './GameBoard.ts';
 
 class GameBoard extends React.Component<AllProps, GameBoardState> {
 
@@ -29,7 +14,7 @@ class GameBoard extends React.Component<AllProps, GameBoardState> {
     this.props.onUpdateBoard(tile);
     this.forceUpdate();
   }
-
+  
   render() {
     const { board } = this.props;
     return (

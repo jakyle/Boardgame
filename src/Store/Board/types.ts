@@ -1,9 +1,10 @@
 import { Action } from 'redux';
-import { TileInfo } from '../../Models/Models';
+import { TileInfo, TilePosition } from '../../Models/Models';
 
 // all of my types for Cart action/reducer
 export enum types {
   UPDATE_BOARD = '@@board/UPDATE_BOARD',
+  CREATE_BOARD = '@@board/CREATE_BOARD',
 }
 // interfaces for actions, notice that I am importing Actions from redux, this is just
 // extra boilerplate to help keep my code extra typesafe.
@@ -14,13 +15,22 @@ export interface UpdateBoard extends Action {
   };
 }
 
+export interface CreateBoard extends Action {
+  type: types.CREATE_BOARD;
+  payload: {
+    size: TilePosition
+  };
+}
+
 // this is my board action, this will be exported to my reducers for the switch statement.
 export type BoardActions =
-  | UpdateBoard;
+  | UpdateBoard
+  | CreateBoard;
 
 // this is the contract for my Carts state, the initial state
 // will be defined in the actual reducer.
 export interface BoardState {
+  size: TilePosition;
   board: TileInfo[];
   currentTile: TileInfo;
 }
