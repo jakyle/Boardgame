@@ -1,37 +1,10 @@
 import { Reducer } from 'redux';
 import { types, BoardState, UpdateBoard, BoardActions, CreateBoard } from './types';
 import { updateObject } from '../../util/';
-import { Occupied } from '../../Models/Models';
+import { Occupied, TileInfo } from '../../Models/Models';
 
 const initialState: BoardState = {
-  size: { col: 0, row: 0},
-  board: [
-    { location: { row: 1, col: 1 }, occupied: Occupied.Empty },
-    { location: { row: 1, col: 2 }, occupied: Occupied.Empty },
-    { location: { row: 1, col: 3 }, occupied: Occupied.Empty },
-    { location: { row: 1, col: 4 }, occupied: Occupied.Empty },
-    { location: { row: 1, col: 5 }, occupied: Occupied.Empty },
-    { location: { row: 2, col: 1 }, occupied: Occupied.Empty },
-    { location: { row: 2, col: 2 }, occupied: Occupied.Empty },
-    { location: { row: 2, col: 3 }, occupied: Occupied.Empty },
-    { location: { row: 2, col: 4 }, occupied: Occupied.PlayerTwo },
-    { location: { row: 2, col: 5 }, occupied: Occupied.Empty },
-    { location: { row: 3, col: 1 }, occupied: Occupied.Empty },
-    { location: { row: 3, col: 2 }, occupied: Occupied.Empty },
-    { location: { row: 3, col: 3 }, occupied: Occupied.Empty },
-    { location: { row: 3, col: 4 }, occupied: Occupied.Empty },
-    { location: { row: 3, col: 5 }, occupied: Occupied.Empty },
-    { location: { row: 4, col: 1 }, occupied: Occupied.Empty },
-    { location: { row: 4, col: 2 }, occupied: Occupied.PlayerOne },
-    { location: { row: 4, col: 3 }, occupied: Occupied.Empty },
-    { location: { row: 4, col: 4 }, occupied: Occupied.Empty },
-    { location: { row: 4, col: 5 }, occupied: Occupied.Empty },
-    { location: { row: 5, col: 1 }, occupied: Occupied.Empty },
-    { location: { row: 5, col: 2 }, occupied: Occupied.Empty },
-    { location: { row: 5, col: 3 }, occupied: Occupied.Empty },
-    { location: { row: 5, col: 4 }, occupied: Occupied.Empty },
-    { location: { row: 5, col: 5 }, occupied: Occupied.Empty },
-  ],
+  board: [ ],
   currentTile: { location: { row: -1, col: -1 }, occupied: Occupied.Empty },
 };
 
@@ -57,7 +30,22 @@ export const updateBoard = (state: BoardState, action: UpdateBoard): BoardState 
 };
 
 export const createBoard = (state: BoardState, action: CreateBoard): BoardState => {
-  return updateObject(state, {size: action.payload.size});
+
+  const tableSize = action.payload.size.col * action.payload.size.row;
+
+  const board = new Array<TileInfo>(tableSize);
+  let acc = 0;
+  debugger;
+  for (let i = 0; i < action.payload.size.col; i++) {
+    for (let j = 0; j < action.payload.size.row; j++) {
+      board[acc] = { location: { row: i + 1, col: j + 1 }, occupied: Occupied.Empty };
+      acc++;
+    }
+  }
+
+  // so right now im just more or less thinking about how I am going to tackle this next challenge...
+
+  return updateObject(state, {board});
 };
 
 const reducer: Reducer<BoardState> = (state: BoardState = initialState, action: BoardActions) => {

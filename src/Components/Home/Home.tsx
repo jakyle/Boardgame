@@ -21,11 +21,16 @@ class Home extends React.Component<AllProps, HomeState> {
     this.setState({pos});   
   }
 
-  public handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  public handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     const pos = {...this.state.pos};
-    debugger;
     this.props.onUpdateBoard(pos);
+    this.props.history.push('/board');
+    // so I need to inheririt from react-router so I can access the history type with type safety.  
+    // so I am simply trying to change the page to the page where the board displays. 
+    // nothing a little referencing can't fix. cool now intellesense is no longer yelling at me :)
+    // okay now for the moment of truth.  now that I am passing the user props, it will create a table for me 
+    // without players mind you, then route me back to the proper page. I actually need to run the app to test it.
   }
 
   render () {
