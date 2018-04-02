@@ -7,6 +7,7 @@ import {
   types,
   UpdateBoard,
   CreateBoard,
+  PlacePlayers,
 } from './types';
 import { TileInfo, TilePosition } from '../../Models/Models';
 
@@ -22,4 +23,9 @@ export const updateBoard: ActionCreator<UpdateBoard> = (tile: TileInfo) => ({
 export const createBoard: ActionCreator<CreateBoard> = (size: TilePosition) => ({
   type: types.CREATE_BOARD,
   payload: { size },
+});
+
+export const placePlayers: ActionCreator<PlacePlayers> = (playerOne: TilePosition, playerTwo: TilePosition) => ({
+  type: types.PLACE_PLAYERS,
+  payload: { playerOne, playerTwo }
 });

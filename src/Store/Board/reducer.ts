@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { types, BoardState, UpdateBoard, BoardActions, CreateBoard } from './types';
+import { types, BoardState, UpdateBoard, BoardActions, CreateBoard, PlacePlayers } from './types';
 import { updateObject } from '../../util/';
 import { Occupied, TileInfo } from '../../Models/Models';
 
@@ -70,10 +70,25 @@ export const createBoard = (state: BoardState, action: CreateBoard): BoardState 
   return updateObject(state, {board, size});
 };
 
+export const placePlayers = (state: BoardState, action: PlacePlayers): BoardState => {
+  const { playerOne, playerTwo } = action.payload;
+  const { board } = state;
+  // tslint:disable-next-line:triple-equals
+  let playerOneTile = board.filter(t => t.location.col == playerOne.col && t.location.row == playerOne.row)[0];
+  playerOneTile.occupied = Occupied.PlayerOne;
+  board.filter(t => t.location === playerOneTile.location)[0] = playerOneTile;
+  // tslint:disable-next-line:triple-equals
+  let playerTwoTile = board.filter(t => t.location.col == playerTwo.col && t.location.row == playerTwo.row )[0];
+  playerTwoTile.occupied = Occupied.PlayerTwo;
+  board.filter(t => t.location === playerTwoTile.location)[0] = playerTwoTile;
+  return updateObject(state, {board});
+};
+
 const reducer: Reducer<BoardState> = (state: BoardState = initialState, action: BoardActions) => {
   switch (action.type) {
     case types.UPDATE_BOARD: return updateBoard(state, action);
     case types.CREATE_BOARD: return createBoard(state, action);
+    case types.PLACE_PLAYERS: return placePlayers(state, action);
     default: return state;
   }
 };

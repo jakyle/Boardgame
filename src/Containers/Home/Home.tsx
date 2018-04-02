@@ -2,10 +2,10 @@ import * as React from 'react';
 // import { Link } from 'react-router-dom';
 import { connect, Dispatch } from 'react-redux';
 import { HomeState, AllProps, ConnectedStates } from './Home.ts';
-import { TilePosition } from '../../Models/Models';
 import { createBoard } from '../../Store/Board/action';
 import { BoardActions } from '../../Store/Board/types';
 import { posValidation } from '../../util/util';
+import PositionInputs from '../../Components/PositionInputs/PositionInputs';
 
 class Home extends React.Component<AllProps, HomeState> {
 
@@ -23,28 +23,23 @@ class Home extends React.Component<AllProps, HomeState> {
   public handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const pos = {...this.state.pos};
-    // const valid = {...this.state.valid};
     if (posValidation(pos.col) && posValidation(pos.row)) {
       this.props.onCreateBoard(pos);
-      this.props.history.push('/board');
+      this.props.history.push('/playerpos');
     } else {
       const errorMessage = 'Invalid entry, enter a number range between 1 - 50 for both fields';
       this.setState({errorMessage});
     }
-    
   }
-
+  // create some sort of method that handles ... adding player one and player two token...
   render () {
-    const { col, row } = this.state.pos;
+    const { pos } = this.state;
     return (
       <div>
         <h1>Welcome to the boardgame app, please enter the number of rows and columns for your game</h1>
         <br />
         <h4>enter a number range between 1 - 50 for both fields.</h4>
-        <label>rows: </label> <br />
-        <input type="number" onChange={this.handleChangeFor('col')} value={col} /><br />
-        <label>columns: </label><br />
-        <input type="number" onChange={this.handleChangeFor('row')} value={row} /><br />
+        <PositionInputs pos={pos} handleChange={this.handleChangeFor} />
         <button onClick={this.handleSubmit} >Create Grid</button><br />
         {this.state.errorMessage.length > 0 
           ? <p>{this.state.errorMessage}</p> 
@@ -57,7 +52,7 @@ class Home extends React.Component<AllProps, HomeState> {
 
 const mapDispatchToProps = (dispatch: Dispatch<BoardActions>): ConnectedStates => {
   return {
-    onCreateBoard: (size: TilePosition) => dispatch(createBoard(size)),
+    onCreateBoard: (size) => dispatch(createBoard(size)),
   };
 };
 
