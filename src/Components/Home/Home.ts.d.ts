@@ -1,8 +1,14 @@
 import { TilePosition } from "../../Models/Models";
 import { RouteComponentProps } from "react-router";
 
+export interface PosValid {
+  row: boolean;
+  col: boolean;
+}
+
 export interface HomeState {
-  pos: TilePosition
+  pos: TilePosition;
+  errorMessage: string;
 }
 
 export interface StoreProps {}
