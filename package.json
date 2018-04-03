@@ -56,7 +56,7 @@
     "electron-pack": "build -c.extraMetadata.main=build/electron-starter.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "electron-start": "electron .",
+    "electron-start": "electron . --allow-file-access-from-files",
     "start": "concurrently \"yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "devDependencies": {
