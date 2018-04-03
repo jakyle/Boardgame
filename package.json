@@ -4,6 +4,7 @@
   "private": true,
   "author": "James&Damon",
   "dependencies": {
+    "axios": "^0.18.0",
     "electron-is-dev": "^0.3.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",

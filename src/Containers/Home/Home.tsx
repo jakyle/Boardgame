@@ -39,11 +39,16 @@ class Home extends React.Component<AllProps, HomeState> {
       this.setState({errorMessage});
     }
   }
+
+  public handleFilesClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    this.props.history.push('/files');
+  }
   // create some sort of method that handles ... adding player one and player two token...
   render () {
     const { pos } = this.state;
     return (
       <div>
+        <button onClick={this.handleFilesClick}>Click here to see files</button>
         <h1>Welcome to the boardgame app, please enter the number of rows and columns for your game</h1>
         <br />
         <h4>enter a number range between 1 - 50 for both fields.</h4>

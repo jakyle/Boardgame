@@ -13,3 +13,7 @@ export interface TilePosition {
   col: number;
   row: number;
 }
+
+export class TileImage extends TileInfo {
+  image: string;
+}
