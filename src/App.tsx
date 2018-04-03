@@ -4,9 +4,11 @@ import { Switch, Route } from 'react-router';
 import Home from './Containers/Home/Home';
 import Playerpos from './Containers/Playerpos/Playerpos';
 import Sidemenu from './Containers/Sidemenu/Sidemenu';
+import Navbar from './Components/Navbar/Navbar';
 
 const App = () => (
   <div className="App">
+    <Navbar />
     <Switch>
       <Route exact={true} path="/" component={Home}/>
       <Route path="/board" component={GameBoard}/>

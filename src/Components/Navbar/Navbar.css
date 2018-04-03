@@ -1,0 +1,17 @@
+.Navbar {
+  display: flex;
+  justify-content: space-around;
+  height: 30px;
+  background-color: black;
+  margin-bottom: 10px;
+}
+
+.Navbar a {
+  padding: 10px;
+  text-decoration: none;
+  color: white
+}
+
+.Navbar a:hover {
+    color: lightblue;
+}
