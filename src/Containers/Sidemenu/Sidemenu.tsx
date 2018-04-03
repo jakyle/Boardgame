@@ -1,5 +1,6 @@
 import * as React from 'react';
 import getFiles from '../../Server/renderer';
+import { remote } from 'electron';
 // import { TileImage } from '../../Models/Models';
 
 interface SidemenuProps {}
@@ -16,7 +17,7 @@ class Sidemenu extends React.Component<SidemenuProps, SidemenuState> {
 
   public clickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     let files = {...this.state.files};
-    files = getFiles('C:\\Users\\jimmy\\Pictures');
+    files = getFiles(remote.dialog.showOpenDialog({properties: ['openDirectory']})[0]);
     this.setState({files});
   }
 

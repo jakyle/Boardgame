@@ -1,8 +1,11 @@
 import * as fs from 'fs';
+// const { remote } = require('electron');
 // import * as path from 'path';
+
+const pattern = new RegExp(/^.*\.(png|jpg|jpeg|gif)$/ig);
 
 const getFiles = (directory: string): string[] => 
   fs.readdirSync(directory)
-    .filter(file => !fs.statSync(`${directory}/${file}`).isDirectory());
-
+    .map(file => `${directory}/${file}`)
+    .filter(file => !fs.statSync(file).isDirectory() && pattern.test(file));
 export default getFiles;
