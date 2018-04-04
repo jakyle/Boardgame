@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import { compose, applyMiddleware, createStore } from 'redux';
 import { rootReducer } from './Store';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+import App from './Views/App';
 
 declare global {
   // tslint:disable-next-line:no-any

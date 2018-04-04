@@ -1,0 +1,13 @@
+.Create-Map {
+  display: flex;
+  max-width: 100%;
+}
+
+.Create-Map-Menu {
+  width: 10%;
+  border-left: 2px solid grey;
+}
+
+.Create-Map-Board {
+  width: 88%;
+}

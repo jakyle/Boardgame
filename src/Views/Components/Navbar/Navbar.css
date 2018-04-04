@@ -1,0 +1,18 @@
+.Navbar {
+  display: flex;
+  justify-content: space-around;
+  height: 2em;
+  background-color: black;
+  width: 100vw;
+  position: fixed;
+}
+
+.Navbar a {
+  padding: 10px;
+  text-decoration: none;
+  color: white
+}
+
+.Navbar a:hover {
+    color: lightblue;
+}

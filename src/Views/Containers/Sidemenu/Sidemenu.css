@@ -1,0 +1,13 @@
+.Side-Menu {
+  text-align: center;
+  width: 217px;
+  overflow: scroll;
+  max-height: 95vh;
+}
+
+.Side-Menu-List {
+  display: flex;
+  justify-content: safe space-around;
+  align-content: safe space-between;
+  flex-wrap: wrap;
+}
