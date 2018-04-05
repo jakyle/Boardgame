@@ -33,7 +33,7 @@ class Home extends React.Component<AllProps, HomeState> {
       this.props.onCreateBoard(pos);
       this.state.includePlayers 
         ? this.props.history.push('/playerpos')
-        : this.props.history.push('/board');
+        : this.props.history.push('/createmap');
     } else {
       const errorMessage = 'Invalid entry, enter a number range between 1 - 50 for both fields';
       this.setState({errorMessage});
