@@ -10,7 +10,7 @@ const Navbar: React.SFC<NavbarProps> = (props) => {
 return (
   <div className="Navbar">
     <Link to="/">Home</Link>
-    <Link to="/board">Board</Link>
+    {/* <Link to="/board">Board</Link> */}
     <Link to="/createmap">Create Map</Link>
   </div>);
 };

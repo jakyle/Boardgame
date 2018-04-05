@@ -40,26 +40,23 @@ class Home extends React.Component<AllProps, HomeState> {
     }
   }
 
-  public handleFilesClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    this.props.history.push('/files');
-  }
   // create some sort of method that handles ... adding player one and player two token...
   render () {
     const { pos } = this.state;
     return (
       <div>
-        <button onClick={this.handleFilesClick}>Click here to see files</button>
-        <h1>Welcome to the boardgame app, please enter the number of rows and columns for your game</h1>
+        <h1>Welcome to the tabletop wip app</h1>
+        <h2>please enter the number of rows and columns for your game</h2>
         <br />
         <h4>enter a number range between 1 - 50 for both fields.</h4>
         <PositionInputs pos={pos} handleChange={this.handleChangeFor} />
-        <label>Check if you would like to place player one and two</label><br />
-        <input 
+        {/* <label>Check if you would like to place player one and two</label><br /> */}
+{/*         <input 
           type="checkbox"
           onChange={this.handleChangeFor('includePlayers')} 
           checked={this.state.includePlayers} 
-        /> <br />
-        <button onClick={this.handleSubmit} >Create Grid</button><br />
+        /> <br /> */}
+        <button onClick={this.handleSubmit}>Create Grid</button><br />
         {this.state.errorMessage.length > 0 
           ? <p>{this.state.errorMessage}</p> 
           : null

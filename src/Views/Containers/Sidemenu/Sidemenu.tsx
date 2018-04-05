@@ -2,34 +2,29 @@ import * as React from 'react';
 import { remote } from 'electron';
 import './Sidemenu.css';
 import { getFiles } from '../../../util';
+import { connect, Dispatch } from 'react-redux';
+import { ApplicationState } from '../../../Store';
+import { AllProps, SidemenuState, StoreProps, ConnectedStates } from './Sidemenu.ts';
+import { TileMenuActions } from '../../../Store/TileMenu/types';
+import { addImages } from '../../../Store/TileMenu/action';
 // import { TileImage } from '../../Models/Models';
 
-interface SidemenuProps {}
-
-interface SidemenuState {
-  files: string[];
-}
-
-class Sidemenu extends React.Component<SidemenuProps, SidemenuState> {
-
-  state = {
-    files: new Array<string>()
-  };
+class Sidemenu extends React.Component<AllProps, SidemenuState> {
 
   public buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    let files = {...this.state.files};
-    files = getFiles(remote.dialog.showOpenDialog({properties: ['openDirectory']})[0]);
-    this.setState({files});
+    let imagePaths = {...this.props.imagePaths};
+    imagePaths = getFiles(remote.dialog.showOpenDialog({properties: ['openDirectory']})[0]);
+    this.props.onAddImages(imagePaths);
   }
 
   public render() {
-    const { files } = this.state;
+    const { imagePaths } = this.props;
     return (
       <div className="Side-Menu">
         <button onClick={this.buttonHandler} >Get Files</button>
-        {files.length >= 1 
-        ? <div className="Side-Menu-List">{files.map((file, index) => (
-            <div key={index}><img src={file} width="100" height="100"/></div>))}
+        {imagePaths.length >= 1 
+        ? <div className="Side-Menu-List">{imagePaths.map((imagePath, index) => (
+            <div key={index}><img src={imagePath} width="100" height="100"/></div>))}
           </div>
         : null}
       </div>
@@ -37,4 +32,14 @@ class Sidemenu extends React.Component<SidemenuProps, SidemenuState> {
   }
 }
 
-export default Sidemenu;
+const mapStateToProps = (state: ApplicationState): StoreProps => {
+  const { imagePaths } = state.tileMenu;
+  return { imagePaths };
+};
+const mapDispatchToProps = (dispatch: Dispatch<TileMenuActions>): ConnectedStates => {
+  return {
+    onAddImages: (imagePaths) => dispatch(addImages(imagePaths)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidemenu);

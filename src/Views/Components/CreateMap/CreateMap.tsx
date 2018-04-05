@@ -9,11 +9,11 @@ interface CreateMapProps {
 const CreateMap: React.SFC<CreateMapProps> = (props) => {
   return (
     <div className="Create-Map">
-      <div className="Create-Map-Board">
-        <GameBoard />
-      </div>
       <div className="Create-Map-Menu">
-        <Sidemenu />
+            <Sidemenu />
+        </div>
+      <div className="Create-Map-Board">
+          <GameBoard />
       </div>
     </div>
   );

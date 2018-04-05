@@ -28,7 +28,7 @@ const Grid: React.SFC<AllProps> = ( {size, children }: AllProps) => {
     grid-template-rows: repeat(${size.row}, 25px);
   }
 `;
-  return <Content >{children}</Content>;
+  return <Content>{children}</Content>;
 };
 
 export default Grid;
