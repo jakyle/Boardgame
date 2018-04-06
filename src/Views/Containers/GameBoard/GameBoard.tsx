@@ -12,6 +12,7 @@ import { updateBoard } from '../../../Store/Board/action';
 class GameBoard extends React.Component<AllProps, GameBoardState> {
 
   public clickHandler = (tile: TileInfo) => {
+    tile.menuImage = this.props.selectedImage;
     this.props.onUpdateBoard(tile);
     this.forceUpdate();
   }
@@ -21,12 +22,13 @@ class GameBoard extends React.Component<AllProps, GameBoardState> {
     return (
       <div className="Game-Board">
         <Grid size={size}>
-        {board.map((tile, index) => (
-          <Tile
+        {board.map((tile, index) => {
+          return (<Tile
             clicked={this.clickHandler}
             key={index}
             tileInfo={tile}
-          />))}
+          />);
+        })}
       </Grid>
       </div>
       
@@ -36,7 +38,8 @@ class GameBoard extends React.Component<AllProps, GameBoardState> {
 
 const mapStateToProps = (state: ApplicationState): StoreProps => {
   const { currentTile, board, size } = state.board;
-  return { board, currentTile, size };
+  const { selectedImage } = state.tileMenu;
+  return { board, currentTile, size, selectedImage };
 };
 const mapDispatchToProps = (dispatch: Dispatch<BoardActions>): ConnectedStates => {
   return {

@@ -12,7 +12,8 @@ return (
     <Link to="/">Home</Link>
     {/* <Link to="/board">Board</Link> */}
     <Link to="/createmap">Create Map</Link>
-  </div>);
+  </div>
+  );
 };
 
 export default Navbar;

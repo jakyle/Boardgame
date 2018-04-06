@@ -6,7 +6,9 @@ import { ActionCreator } from 'redux';
 import {
   types,
   AddImages,
+  SelectImage,
 } from './types';
+import { MenuImage } from '../../Models/Models';
 
 // I like to pass in empty objects as payloads in case I end up changing the definition for
 // my actions.  if I do this the payload section will be clear to me what its for, any
@@ -15,4 +17,9 @@ import {
 export const addImages: ActionCreator<AddImages> = (imagePaths: string[]) => ({
   type: types.ADD_IMAGES,
   payload: { imagePaths },
+});
+
+export const selectImage: ActionCreator<SelectImage> = (menuImage: MenuImage) => ({
+  type: types.SELECT_IMAGE,
+  payload: { menuImage }
 });
