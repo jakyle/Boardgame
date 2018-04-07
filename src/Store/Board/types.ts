@@ -6,6 +6,7 @@ export enum types {
   UPDATE_BOARD = '@@board/UPDATE_BOARD',
   CREATE_BOARD = '@@board/CREATE_BOARD',
   PLACE_PLAYERS = '@@board/PLACE_PLAYERS',
+  DEFAULT_BOARD_SIZE = '@@board/DEFAULT_BOARD_SIZE',
 }
 // interfaces for actions, notice that I am importing Actions from redux, this is just
 // extra boilerplate to help keep my code extra typesafe.
@@ -31,11 +32,17 @@ export interface PlacePlayers extends Action {
   };
 }
 
+export interface DefaultBoardSize extends Action {
+  type: types.DEFAULT_BOARD_SIZE;
+  payload: {};
+}
+
 // this is my board action, this will be exported to my reducers for the switch statement.
 export type BoardActions =
   | UpdateBoard
   | CreateBoard
-  | PlacePlayers;
+  | PlacePlayers
+  | DefaultBoardSize;
 
 // this is the contract for my Carts state, the initial state
 // will be defined in the actual reducer.

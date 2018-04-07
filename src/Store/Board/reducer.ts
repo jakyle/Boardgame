@@ -1,37 +1,11 @@
 import { Reducer } from 'redux';
-import { types, BoardState, UpdateBoard, BoardActions, CreateBoard, PlacePlayers } from './types';
+import { types, BoardState, UpdateBoard, BoardActions, CreateBoard, PlacePlayers, DefaultBoardSize } from './types';
 import { updateObject } from '../../util/';
 import { Occupied, TileInfo } from '../../Models/Models';
 
 const initialState: BoardState = {
-  size: {col: 5, row: 5},
-  board: [
-    { location: { row: 1, col: 1 }, occupied: Occupied.Empty },
-    { location: { row: 1, col: 2 }, occupied: Occupied.Empty },
-    { location: { row: 1, col: 3 }, occupied: Occupied.Empty },
-    { location: { row: 1, col: 4 }, occupied: Occupied.Empty },
-    { location: { row: 1, col: 5 }, occupied: Occupied.Empty },
-    { location: { row: 2, col: 1 }, occupied: Occupied.Empty },
-    { location: { row: 2, col: 2 }, occupied: Occupied.Empty },
-    { location: { row: 2, col: 3 }, occupied: Occupied.Empty },
-    { location: { row: 2, col: 4 }, occupied: Occupied.Empty },
-    { location: { row: 2, col: 5 }, occupied: Occupied.Empty },
-    { location: { row: 3, col: 1 }, occupied: Occupied.Empty },
-    { location: { row: 3, col: 2 }, occupied: Occupied.Empty },
-    { location: { row: 3, col: 3 }, occupied: Occupied.Empty },
-    { location: { row: 3, col: 4 }, occupied: Occupied.Empty },
-    { location: { row: 3, col: 5 }, occupied: Occupied.Empty },
-    { location: { row: 4, col: 1 }, occupied: Occupied.Empty },
-    { location: { row: 4, col: 2 }, occupied: Occupied.Empty },
-    { location: { row: 4, col: 3 }, occupied: Occupied.Empty },
-    { location: { row: 4, col: 4 }, occupied: Occupied.Empty },
-    { location: { row: 4, col: 5 }, occupied: Occupied.Empty },
-    { location: { row: 5, col: 1 }, occupied: Occupied.Empty },
-    { location: { row: 5, col: 2 }, occupied: Occupied.Empty },
-    { location: { row: 5, col: 3 }, occupied: Occupied.Empty },
-    { location: { row: 5, col: 4 }, occupied: Occupied.Empty },
-    { location: { row: 5, col: 5 }, occupied: Occupied.Empty },
-  ],
+  size: {col: -1, row: -1},
+  board: [],
   currentTile: { location: { row: -1, col: -1 }, occupied: Occupied.Empty },
 };
 
@@ -84,11 +58,26 @@ export const placePlayers = (state: BoardState, action: PlacePlayers): BoardStat
   return updateObject(state, {board});
 };
 
+export const defaultBoardSize = (state: BoardState, action: DefaultBoardSize): BoardState => {
+  const size = {col: 10, row: 10};
+  const tableSize = size.col * size.row;
+  const board = new Array<TileInfo>(tableSize);
+  let acc = 0;
+  for (let i = 0; i < size.col; i++) {
+    for (let j = 0; j < size.row; j++) {
+      board[acc] = { location: { row: i + 1, col: j + 1 }, occupied: Occupied.Empty };
+      acc++;
+    }
+  }
+  return updateObject(state, {size, board});
+};
+
 const reducer: Reducer<BoardState> = (state: BoardState = initialState, action: BoardActions) => {
   switch (action.type) {
     case types.UPDATE_BOARD: return updateBoard(state, action);
     case types.CREATE_BOARD: return createBoard(state, action);
     case types.PLACE_PLAYERS: return placePlayers(state, action);
+    case types.DEFAULT_BOARD_SIZE: return defaultBoardSize(state, action);
     default: return state;
   }
 };

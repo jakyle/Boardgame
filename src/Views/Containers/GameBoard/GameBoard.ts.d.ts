@@ -12,6 +12,7 @@ export interface StoreProps {
 }
 export interface ConnectedStates { 
   onUpdateBoard: (tile: TileInfo) => void;
+  onDefaultBoardSize: () => void;
 }
 
 export type AllProps = 

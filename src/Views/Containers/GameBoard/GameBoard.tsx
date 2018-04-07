@@ -7,7 +7,7 @@ import './GameBoard.css';
 import { ApplicationState } from '../../../Store';
 import { BoardActions } from '../../../Store/Board/types';
 import { TileInfo } from '../../../Models/Models';
-import { updateBoard } from '../../../Store/Board/action';
+import { updateBoard, defaultBoardSize } from '../../../Store/Board/action';
 
 class GameBoard extends React.Component<AllProps, GameBoardState> {
 
@@ -15,6 +15,12 @@ class GameBoard extends React.Component<AllProps, GameBoardState> {
     tile.menuImage = this.props.selectedImage;
     this.props.onUpdateBoard(tile);
     this.forceUpdate();
+  }
+
+  componentWillMount() {
+    if (this.props.board.length === 0) {
+      this.props.onDefaultBoardSize();
+    }
   }
   
   render() {
@@ -43,7 +49,8 @@ const mapStateToProps = (state: ApplicationState): StoreProps => {
 };
 const mapDispatchToProps = (dispatch: Dispatch<BoardActions>): ConnectedStates => {
   return {
-    onUpdateBoard: (tile: TileInfo) => dispatch(updateBoard(tile)),
+    onUpdateBoard: (tile) => dispatch(updateBoard(tile)),
+    onDefaultBoardSize: () => dispatch(defaultBoardSize()),
   };
 };
 

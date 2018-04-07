@@ -8,6 +8,7 @@ import {
   UpdateBoard,
   CreateBoard,
   PlacePlayers,
+  DefaultBoardSize,
 } from './types';
 import { TileInfo, TilePosition } from '../../Models/Models';
 
@@ -28,4 +29,9 @@ export const createBoard: ActionCreator<CreateBoard> = (size: TilePosition) => (
 export const placePlayers: ActionCreator<PlacePlayers> = (playerOne: TilePosition, playerTwo: TilePosition) => ({
   type: types.PLACE_PLAYERS,
   payload: { playerOne, playerTwo }
+});
+
+export const defaultBoardSize: ActionCreator<DefaultBoardSize> = () => ({
+  type: types.DEFAULT_BOARD_SIZE,
+  payload: {},
 });
