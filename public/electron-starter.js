@@ -3,8 +3,13 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const isDev = require('electron-is-dev');
 const path = require('path');
+const fs = require('fs');
+const os = require('os');
 const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
 
+if(!fs.existsSync(`${os.tmpdir()}\\BoardGame\\Menu-Images`)) {
+  fs.mkdirSync(`${os.tmpdir()}\\BoardGame\\Menu-Images`)
+}
 
 let mainWindow;
 function createWindow() {
@@ -44,4 +49,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-

@@ -10,11 +10,11 @@ interface ImageTileProps {
 const ImageTile: React.SFC<ImageTileProps> = ({ menuImage, clicked }: ImageTileProps) =>
   menuImage.isSelected ?  (
       <div className="Selected-Image-Tile" onClick={(e) => clicked(menuImage)}>
-        <img src={menuImage.imagePath} width="85" height="85"/>
+        <img src={menuImage.imagePath} />
       </div>
     ) : ( 
       <div className="ImageTile" onClick={(e) => clicked(menuImage)}>
-        <img src={menuImage.imagePath} width="100" height="100"/>
+        <img src={menuImage.imagePath} />
       </div>
     );
 

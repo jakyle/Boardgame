@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { remote } from 'electron';
 import './Sidemenu.css';
-import { getFiles } from '../../../util';
 import { connect, Dispatch } from 'react-redux';
 import { ApplicationState } from '../../../Store';
 import { AllProps, SidemenuState, StoreProps, ConnectedStates } from './Sidemenu.ts';
@@ -9,12 +8,15 @@ import { TileMenuActions } from '../../../Store/TileMenu/types';
 import { addImages, selectImage } from '../../../Store/TileMenu/action';
 import ImageTile from '../../Components/ImageTile/ImageTile';
 import { MenuImage } from '../../../Models/Models';
+import { MenuImaging } from '../../../util';
 // import { TileImage } from '../../Models/Models';
 
 class Sidemenu extends React.Component<AllProps, SidemenuState> {
 
-  public buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    let imagePaths = getFiles(remote.dialog.showOpenDialog({properties: ['openDirectory']})[0]);
+  public buttonHandler =  async (event: React.MouseEvent<HTMLButtonElement>) => {
+    const directory = remote.dialog.showOpenDialog({properties: ['openDirectory']})[0];
+    const menuImg = new MenuImaging();
+    let imagePaths =  await menuImg.fillDirectory(directory);
     this.props.onAddImages(imagePaths);
   }
 

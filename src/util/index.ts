@@ -4,5 +4,5 @@ export {
 } from './util';
 
 export {
-  getFiles,
-} from './renderer';
+  MenuImaging,
+} from './MenuImaging';
