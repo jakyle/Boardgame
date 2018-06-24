@@ -2,8 +2,8 @@ import { MenuImage } from "../../../Models/Models";
 
 export interface SidemenuProps { }
 export interface StoreProps {
-  menuImages: MenuImage[] | null,
-  selectedImage: MenuImage | null,
+  menuImages: MenuImage[],
+  selectedImage?: MenuImage,
 }
 export interface SidemenuState { }
 export interface ConnectedStates {

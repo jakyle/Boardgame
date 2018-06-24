@@ -8,7 +8,7 @@ export interface StoreProps {
   board: TileInfo[];
   currentTile: TileInfo;
   size: TilePosition;
-  selectedImage: MenuImage | null;
+  selectedImage?: MenuImage;
 }
 export interface ConnectedStates { 
   onUpdateBoard: (tile: TileInfo) => void;

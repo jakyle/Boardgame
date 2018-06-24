@@ -1,25 +1,25 @@
 import * as React from 'react';
-import { remote } from 'electron';
+// import { remote } from 'electron';
 import './Sidemenu.css';
 import { connect, Dispatch } from 'react-redux';
-import { ApplicationState } from '../../../Store';
 import { AllProps, SidemenuState, StoreProps, ConnectedStates } from './Sidemenu.ts';
-import { TileMenuActions } from '../../../Store/TileMenu/types';
-import { addImages, selectImage } from '../../../Store/TileMenu/action';
+import { ApplicationState } from '../../../Main/Store';
+import { TileMenuActions } from '../../../Main/Store/TileMenu/types'; 
+import { addImages, selectImage } from '../../../Main/Store/TileMenu/action';
 import ImageTile from '../../Components/ImageTile/ImageTile';
-import { MenuImage } from '../../../Models/Models';
-import { MenuImaging } from '../../../util';
+import { MenuImage } from '../../../../Models/Models';
+// import { MenuImaging } from '../../../util';
 // import { TileImage } from '../../Models/Models';
 
 class Sidemenu extends React.Component<AllProps, SidemenuState> {
 
-  public buttonHandler =  async (event: React.MouseEvent<HTMLButtonElement>) => {
+/*   public buttonHandler =  async (event: React.MouseEvent<HTMLButtonElement>) => {
     const directory = remote.dialog.showOpenDialog({properties: ['openDirectory']})[0];
     const menuImg = new MenuImaging();
     let imagePaths =  await menuImg.fillDirectory(directory);
     this.props.onAddImages(imagePaths);
   }
-
+ */
   public clickHandler = (menuImage: MenuImage) => {
     this.props.onSelectedImage(menuImage);
     this.forceUpdate();
@@ -29,7 +29,7 @@ class Sidemenu extends React.Component<AllProps, SidemenuState> {
     const { menuImages } = this.props;
     return (
       <div className="Side-Menu">
-        <button onClick={this.buttonHandler}>Get Files</button>
+        <button>Get Files</button>
         {menuImages!.length >= 1 
         ? <div className="Side-Menu-List">{menuImages!.map((menuImage, index) => {
             return <ImageTile 

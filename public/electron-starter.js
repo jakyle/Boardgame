@@ -3,13 +3,11 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const isDev = require('electron-is-dev');
 const path = require('path');
-const fs = require('fs');
-const os = require('os');
 const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
 
-if(!fs.existsSync(`${os.tmpdir()}\\BoardGame\\Menu-Images`)) {
+/* if(!fs.existsSync(`${os.tmpdir()}\\BoardGame\\Menu-Images`)) {
   fs.mkdirSync(`${os.tmpdir()}\\BoardGame\\Menu-Images`)
-}
+} */
 
 let mainWindow;
 function createWindow() {
@@ -30,7 +28,7 @@ function createWindow() {
   mainWindow.on('closed', () => mainWindow = null);
 }
 
-app.on('ready', createWindow);
+app.on('ready', createWindow());
 app.on('ready', () => {
   [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(extension => {
     installExtension(extension)
@@ -40,12 +38,11 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+  if (process.platform !== 'darwin') 
     app.quit();
-  }
+  
 });
 app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow();
-  }
+  if (mainWindow === null) 
+    createWindow();  
 });

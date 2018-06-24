@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { MenuImage } from '../../Models/Models';
+import { MenuImage } from '../../../../Models/Models';
 
 // all of my types for Cart action/reducer
 export enum types {
@@ -31,5 +31,5 @@ export type TileMenuActions =
 // will be defined in the actual reducer.
 export interface TileMenuState {
   menuImages: MenuImage[];
-  selectedImage: MenuImage | null;
+  selectedImage?: MenuImage;
 }

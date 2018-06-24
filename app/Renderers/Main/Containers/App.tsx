@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Switch, Route } from 'react-router';
 import './App.css';
-import Home from './Containers/Home/Home';
-import GameBoard from './Containers/GameBoard/GameBoard';
-import Playerpos from './Containers/Playerpos/Playerpos';
-import CreateMap from './Components/CreateMap/CreateMap';
-import Navbar from './Components/Navbar/Navbar';
+import Home from './Home/Home';
+import GameBoard from './GameBoard/GameBoard';
+import Playerpos from './Playerpos/Playerpos';
+import CreateMap from '../Components/CreateMap/CreateMap';
+import Navbar from '../Components/Navbar/Navbar';
 
 const App = () => (
   <div className="App">

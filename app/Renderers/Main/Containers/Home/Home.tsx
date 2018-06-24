@@ -6,6 +6,7 @@ import PositionInputs from '../../Components/PositionInputs/PositionInputs';
 import { createBoard } from '../../../Store/Board/action';
 import { BoardActions } from '../../../Store/Board/types';
 import { posValidation } from '../../../util';
+import { ipcRenderer, Event } from 'electron';
 
 class Home extends React.Component<AllProps, HomeState> {
 
@@ -40,6 +41,13 @@ class Home extends React.Component<AllProps, HomeState> {
     }
   }
 
+  public handleIpc = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    
+    ipcRenderer.on('async-reply', (ipcEvent: Event, arg: string) => console.log(arg));
+    ipcRenderer.send('async-message', 'ping');
+  }
+
   // create some sort of method that handles ... adding player one and player two token...
   render () {
     const { pos } = this.state;
@@ -61,6 +69,7 @@ class Home extends React.Component<AllProps, HomeState> {
           ? <p>{this.state.errorMessage}</p> 
           : null
         }
+        <button onClick={this.handleIpc}>Process Message</button>
       </div>
     );
   }

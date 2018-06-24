@@ -1,12 +1,11 @@
-import {  statSync, readdirSync, unlinkSync, readdir, readFile } from 'fs';
+/* import {  statSync, readdirSync, unlinkSync, readdir, readFile } from 'fs';
 import { tmpdir } from 'os';
-import { read } from 'jimp';
 import { promisify } from 'util';
 
 const readdirAsync = promisify(readdir);
-const readFileAsync = promisify(readFile);
+const readFileAsync = promisify(readFile); */
 
-export class MenuImaging {
+/* export class MenuImaging {
 
   private _pattern = new RegExp(/^.*\.(png|jpg|jpeg)$/ig);
   private _imgHeight = 100;
@@ -46,3 +45,4 @@ export class MenuImaging {
   }
     
 }
+ */

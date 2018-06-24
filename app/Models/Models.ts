@@ -8,7 +8,7 @@ export enum Occupied {
 export class TileInfo {
   location: TilePosition;
   occupied: Occupied;
-  menuImage?: MenuImage | null;
+  menuImage?: MenuImage;
 }
 
 export interface TilePosition {

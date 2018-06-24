@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { updateObject } from '../../util/';
+import { updateObject } from '../../../../util/';
 import { 
   types,  
   TileMenuState, 
@@ -7,11 +7,11 @@ import {
   TileMenuActions, 
   SelectImage
 } from './types';
-import { MenuImage } from '../../Models/Models';
+import { MenuImage } from '../../../../Models/Models';
 
 const initialState: TileMenuState = {
   menuImages: new Array<MenuImage>(),
-  selectedImage: null,
+  selectedImage: undefined,
 };
 
 export const addImage = (state: TileMenuState, action: AddImages): TileMenuState => {

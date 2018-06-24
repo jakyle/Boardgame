@@ -8,10 +8,13 @@ interface TileProps {
 }
 
 const Tile: React.SFC<TileProps> = ( {tileInfo, clicked }: TileProps) => {
-  const img = tileInfo.menuImage !== undefined 
+  
+  const img = tileInfo.menuImage !== undefined
     ?  <img src={tileInfo.menuImage!.imagePath} height="100" width="100"/>
     : null;
+
   let tile: JSX.Element;
+
   switch (tileInfo.occupied) {
     case Occupied.PlayerOne:
       tile = (<div className="Player One">{img}</div>);
@@ -23,6 +26,7 @@ const Tile: React.SFC<TileProps> = ( {tileInfo, clicked }: TileProps) => {
       tile = (<div>{img}</div>);
       break;
   }
+
   return (<div onClick={(e) => clicked(tileInfo)} className="Tile">{tile}</div>);
 };
 

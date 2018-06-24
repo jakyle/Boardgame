@@ -38,7 +38,7 @@ class PlayerPos extends React.Component<AllProps, PlayerPosState> {
         <label>Player ONE position</label><br />
         <PositionInputs pos={playerOne} handleChange={this.handleChangeForPlayerOne} />
         <br /><br />
-        <label>layer TWO position</label><br />
+        <label>Player TWO position</label><br />
         <PositionInputs pos={playerTwo} handleChange={this.handleChangeForPlayerTwo} />
         <button onClick={this.handleSubmit} >Create Grid</button>
       </div>
